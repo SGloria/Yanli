@@ -1,6 +1,5 @@
-# .gitignore
 .DS_Store
-*.docx
 node_modules/
 .env
-tmp/
+.idea/
+docs/
