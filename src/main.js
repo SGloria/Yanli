@@ -2,11 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initNav();
   initReveal();
-  initCountUp();
   initActiveLink();
 });
-
-/* ===== Theme Toggle ===== */
 
 function initTheme() {
   const toggle = document.getElementById('themeToggle');
@@ -24,15 +21,13 @@ function initTheme() {
   });
 }
 
-/* ===== Navigation ===== */
-
 function initNav() {
   const nav = document.getElementById('nav');
   const toggle = document.getElementById('navToggle');
   const links = document.getElementById('navLinks');
 
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
+    nav.classList.toggle('scrolled', window.scrollY > 30);
   }, { passive: true });
 
   toggle.addEventListener('click', () => {
@@ -48,11 +43,7 @@ function initNav() {
   });
 }
 
-/* ===== Scroll Reveal ===== */
-
 function initReveal() {
-  const els = document.querySelectorAll('.reveal');
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -60,46 +51,10 @@ function initReveal() {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
-  els.forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
-
-/* ===== Count-Up Animation ===== */
-
-function initCountUp() {
-  const nums = document.querySelectorAll('.stat-num[data-target]');
-  let animated = false;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !animated) {
-        animated = true;
-        nums.forEach(num => {
-          const target = parseInt(num.dataset.target, 10);
-          const duration = 1200;
-          const start = performance.now();
-
-          function step(now) {
-            const elapsed = now - start;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            num.textContent = Math.round(eased * target);
-            if (progress < 1) requestAnimationFrame(step);
-          }
-
-          requestAnimationFrame(step);
-        });
-        observer.disconnect();
-      }
-    });
-  }, { threshold: 0.5 });
-
-  const statsContainer = document.querySelector('.hero-stats');
-  if (statsContainer) observer.observe(statsContainer);
-}
-
-/* ===== Active Nav Link ===== */
 
 function initActiveLink() {
   const sections = document.querySelectorAll('section[id]');
@@ -114,7 +69,7 @@ function initActiveLink() {
         });
       }
     });
-  }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
+  }, { threshold: 0.2, rootMargin: '-72px 0px -50% 0px' });
 
   sections.forEach(s => observer.observe(s));
 }
