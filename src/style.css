@@ -308,7 +308,7 @@ body {
 
 .tl-item {
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: 140px 1fr;
   gap: 24px;
   padding: 28px 0;
   border-bottom: 1px solid var(--border);
@@ -466,7 +466,7 @@ body {
 
 .misc-item {
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: 140px 1fr;
   gap: 24px;
   padding: 20px 0;
   border-bottom: 1px solid var(--border);
